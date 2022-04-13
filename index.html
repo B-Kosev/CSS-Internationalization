@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="bg">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Frontend интернационализация на уеб приложения</title>
+		<script
+			src="https://code.jquery.com/jquery-3.6.0.min.js"
+			integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+			crossorigin="anonymous"
+		></script>
+		<link href="./css/index.css" rel="stylesheet" />
+		<link href="./css/lang.css" rel="stylesheet" />
+		<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+		<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+		<script src="./js/index.js"></script>
+	</head>
+	<body>
+		<header>
+			<h1>Интернационализация на текст, използвайки CSS</h1>
+		</header>
+
+		<nav id="navigation">
+			<ol>
+				<li><a href="#intro">Въведение</a></li>
+				<li><a href="#typical-solution">Едно типично решение</a></li>
+				<li><a href="#lang-class">Псевдо-класът :lang</a></li>
+				<li><a href="#css-change">Промяна с CSS</a></li>
+				<li><a href="#improvements">Подобрения</a></li>
+				<li><a href="#api">API от високо ниво</a></li>
+				<li><a href="#advantages">Ползи</a></li>
+				<li><a href="#disadvantages">Недостатъци</a></li>
+				<li><a href="#conclusion">Заключение</a></li>
+				<li><a href="#example">Пример</a></li>
+				<li><a href="#references">Източници</a></li>
+			</ol>
+		</nav>
+
+		<section id="content">
+			<section id="intro">
+				<header>
+					<h2>Въведение</h2>
+				</header>
+				<article>
+					<p>
+						Писането на frontend код често изисква адресирането на различни проблеми свързани с интернационализацията.
+						Освен текущия стандарт, който въвежда много нови тагове, добавянето на поддръжка за различни езици в
+						JavaScript плъгин е все още сложно. Като резултат от това, за всеки нов проект се налага измислянето на
+						решение от нулата или адаптиране на различни съществуващи API-та. В този реферат ще разгледаме подхода за
+						справяне с проблема, използвайки
+						<a target="_blank" href="https://github.com/chemerisuk/better-dom">better-dom</a>.
+					</p>
+				</article>
+			</section>
+
+			<section id="typical-solution">
+				<header>
+					<h2>Едно типично решение на проблема...</h2>
+				</header>
+				<article>
+					<p>
+						Съществуват различни JavaScript API-та за промяна на езика. Повечето от тях съдържат три основни функции:
+					</p>
+					<ol>
+						<li>Първата функция регистрира локализиран низ по ключ и език.</li>
+						<li>Втората задава локализиран низ за даден елемент.</li>
+						<li>Третата се използва за промяна на текущия език.</li>
+					</ol>
+				</article>
+				<p>
+					Нека погледнем един пример базиран на плъгина Validator от библиотеката jQuery Tools. Плъгина поддържа
+					локализация на грешки за валидиране чрез JavaScript. Съобщенията по подразбиране се съхраняват в обекта
+					<code>$.tools.validator.messages</code>
+				</p>
+				<figure>
+					<a
+						href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/705e2214-dc88-4ff3-aca1-2feb74029666/01-messages-opt.gif"
+					>
+						<img
+							src="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/705e2214-dc88-4ff3-aca1-2feb74029666/01-messages-opt.gif"
+							alt="messages"
+							width="650"
+							height="173"
+						/>
+					</a>
+					<figcaption>
+						<p>
+							Съобщенията по подразбиране се съхраняват в обекта
+							<code>$.tools.validator.messages</code><a href="#ref-1">[1]</a>
+						</p>
+					</figcaption>
+				</figure>
+				<p>
+					За ключ плъгина използва CSS селектори. Ако искате да осигурите съобщения за грешки в други езици, трябва да
+					използвате метода
+					<code>$.tools.validator.localize</code>
+					както следва:
+				</p>
+				<!-- prettier-ignore-start -->
+				<pre>
+$.tools.validator.localize("fi", { 
+    ":email" : "Virheellinen s&auml;hk&ouml;postiosoite", 
+    ":number" : "Arvon on oltava numeerinen", 
+    "[max]" : "Arvon on oltava pienempi, kuin $1", 
+    "[min]" : "Arvon on oltava suurempi, kuin $1",
+    "[required]" : "Kent&auml;n arvo on annettava" });</pre
+				>
+				<!-- prettier-ignore-end -->
+				<p>
+					Този метод попълва съобщенията на финландски език.
+					<code>$.tools.validator.messages</code>
+					обекта би изглеждал по следния начин:
+				</p>
+				<figure>
+					<a
+						href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/d0d8a470-f7b1-4e99-b8a8-691e18930da4/02-messages-fi-opt.gif"
+					>
+						<img
+							src="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/d0d8a470-f7b1-4e99-b8a8-691e18930da4/02-messages-fi-opt.gif"
+							alt="messages-fi"
+							width="650"
+							height="210"
+						/>
+					</a>
+					<figcaption>
+						<p>
+							<code>$.tools.validator.messages</code> обекта с попълнени съобщения на финландски език.
+							<a href="#ref-1">[1]</a>
+						</p>
+					</figcaption>
+				</figure>
+				<p>
+					Сега ако искате да използвате финландския език във вашата страница е необходимо да промените езика по
+					подразбиране (английски) чрез
+					<code>lang</code>
+					опцията:
+				</p>
+				<pre>$("#myForm").validator({lang: "fi"});</pre>
+				<p>Плъгина, както и подобни на него, имплементират типично решение, но имат няколко недостатъка:</p>
+				<ol>
+					<li>
+						Налага се да извиквате JavaScript функция ако езика на текущата страница е различен от този по
+						подразбиране (английски).
+					</li>
+					<li>
+						За да се промени езика динамично е необходимо да се извика определена функция и да се промени
+						<code>innerHTML</code>-а на всеки свързан елемент, според новия език.
+					</li>
+					<li>Всеки плъгин има собсветно API.</li>
+				</ol>
+				<p>
+					Първият недостатък е най-критичен. Ако проекта има много компоненти, преминаването към друг език по време на
+					първоначалното зареждане на страница за всеки плъгин би било болезнено. Ако проекта fetch-ва данни чрез AJAX,
+					то същите стъпки би трябвало да бъдат повторени и за бъдещи ресурси. Сега нека се опитаме да разрешим
+					недостатъците, започвайки с техническата част на въпроса.
+				</p>
+			</section>
+
+			<section id="lang-class">
+				<header>
+					<h2>Псевдо-класът <code>:lang</code></h2>
+				</header>
+				<article>
+					<p>
+						Този псевдо-клас е рядко използван, но в
+						<a href="https://www.w3.org/TR/CSS21/selector.html#lang">спецификацията</a> се открива интересна
+						информация за него:
+					</p>
+					<blockquote>
+						Ако езикът на документа специфицира как да се определи даден елемент на какъв човешки език да се
+						визуализира, възможно е да се нашишат CSS селектори, които да съвпаднат с даден елемент базирайки се на
+						неговия език.
+					</blockquote>
+					<p>
+						Типичен пример цитиран в спецификацията е символът за цитат, който се различава в различните езици. Ето
+						как може да се използва заедно с тагът <code>&ltq&gt</code>:
+					</p>
+					<!-- prettier-ignore-start -->
+					<pre>
+:lang(fr) > q { quotes: '« ' ' »' }
+:lang(de) > q { quotes: '»' '«' '\2039' '\203A' }</pre
+					>
+					<!-- prettier-ignore-end -->
+					<p>
+						Примерът отгоре показва как може да се промени визуализацията на дадено съдържание спрямо текущия език
+						използвайки CSS. По този начин логиката свързана с промяната на езика се слага в CSS кода.
+					</p>
+					<p>
+						Този трик е добър, но за съжаление адресира малък брой случай, тъй като обикновено низовете с текст са
+						доста различни в различните езици. Нужен е подход, който позволява промяната на съдържанието на елемент
+						изцяло.
+					</p>
+				</article>
+			</section>
+
+			<section id="css-change">
+				<header>
+					<h2>Промяна на съдържанието на елемент, използвайки CSS</h2>
+				</header>
+				<article>
+					<p>
+						Псевдо-елементите <code>::before</code> и <code>::after</code> са много мощен инструмент за добавяне на
+						допълнително съдържание преди или след <code>innerHTML</code> секцията на елемента. Може да изглеждат
+						прости, но разрешават редица проблеми по доста изчистен начин.
+					</p>
+					<p>
+						И двата Псевдо-елемента въвеждат свойство <code>content</code>, което определя какво съдържание да се
+						добави преди или след елемента. Стойностите му може да са следните:
+					</p>
+					<ul>
+						<li>текст</li>
+						<li>снимка</li>
+						<li>брояч</li>
+						<li>стойности за атрибути</li>
+					</ul>
+					<p>Осново ще се занимаваме с добавянето на текст. Нека имаме следния пример:</p>
+					<!-- prettier-ignore-start -->
+					<pre>
+#hello::before {
+	content: "Hello ";
+}</pre
+					>
+					<!-- prettier-ignore-end -->
+					<p>Ако елементът с ID "hello" съдържа текста "world", то браузърът ще покаже "Hello world".</p>
+					<p>Бихме могли да пренапишем примера, използвайки <code>attr</code> функцията:</p>
+					<pre>
+#hello::before {
+	content: attr(id) " ";
+}</pre
+					>
+					<!-- prettier-ignore-end -->
+					<p>
+						В този случай браузърът ще покаже "hello world" с малко "h" понеже стойността на атрибута "id" е с малки
+						букви.
+					</p>
+					<p>
+						Нека сега си представим, че елементът няма никакво съдържание. В такъв случай можем изцяло да променяме
+						съдържанието му използвайки CSS заедно с Псевдо-класа <code>:lang</code>
+					</p>
+					<!-- prettier-ignore-start -->
+					<pre>
+#hello::before {
+	content: "Hello";
+}
+#hello:lang(de)::before {
+	content: "Hallo";
+}
+#hello:lang(ru)::before {
+	content: "Привет";
+}</pre
+					>
+					<!-- prettier-ignore-end -->
+					<p>
+						По този начин съдържанието на елемента ще се променя спрямо текущия език на уеб страницата - няма нужда да
+						се извикват никакви функции или да се използват плъгини или библиотеки. Локализацията се осъществява
+						използвайки стойността на "lang" атрибута на "html" елемента. Това се нарича
+						<em>CSS-driven интернационализация</em>
+					</p>
+				</article>
+			</section>
+
+			<section id="improvements">
+				<header>
+					<h2>Подобрения</h2>
+				</header>
+				<article>
+					<p>
+						Целта на CSS е да съдържа презентационната логика, но горния подход поставя част от съдържанието на уеб
+						страницата в самия CSS, което не е добре. Авторът решава да разработи по-добра версия на тази идея,
+						използвайки <code>attr</code> функцията, за да прочита <code>data-18n-*</code> атрибут съдържащ низовете
+						текст в различни езици.
+					</p>
+					<p>
+						Нека пренапишем горния пример с елемента "hello" използвайки новия подобрен метод. Този път ще напишем
+						глобален CSS, който да поддържа английски, немски и руски език:
+					</p>
+					<!-- prettier-ignore-start -->
+					<pre>
+/* English (default language)*/
+[data-i18n]::before {
+	content: attr(data-i18n);
+}
+/* German */
+[data-i18n-de]:lang(de)::before {
+	content: attr(data-i18n-de);
+}
+/* Russian */
+[data-i18n-ru]:lang(ru)::before {
+	content: attr(data-i18n-ru);
+}</pre
+					>
+					<!-- prettier-ignore-end -->
+					<p>
+						По този начин вместо да слагаме конкретни низове в CSS-a, добавяме няколко нови атрибута, съдържащи
+						правилния низ за съответния език. Елементът "hello" сега би трябвало да изглежда по следния начин, за да
+						поддържа различните езици:
+					</p>
+					<!-- prettier-ignore-start -->
+					<pre>
+<span>&lt;p id="hello" data-i18n="Hello" data-i18n-de="Hallo" data-i18n-ru="Привет"/&gt;</span></pre>
+					<!-- prettier-ignore-end -->
+					<p>
+						По този начин допълнителният CSS е сведен до минимум, съдържащ само глобалната логика за промяна на
+						репрезентацията на даден елемент спрямо текущия език и всички низове са изцяло в HTML кода.
+					</p>
+				</article>
+			</section>
+
+			<section id="api">
+				<header>
+					<h2>Създаване на API от високо ниво</h2>
+				</header>
+				<article>
+					<p>
+						Основните две функции, които поддържат CSS интернационализация в
+						<a target="_blank" href="https://github.com/chemerisuk/better-dom">better-dom</a> са
+						<code>$Element.prototype.i18n</code> и <code>DOM.importStrings</code>. Първата функция променя низа за
+						даден елемент. Обикновено низовете на английски се използват като ключове и подразбиращи се стойности. По
+						този начин JavaScript кодът е по-прост и по-четим:
+					</p>
+					<!-- prettier-ignore-start -->
+					<pre>myelement.i18n("Hello");</pre>
+					<!-- prettier-ignore-end -->
+					<p>
+						Този код задава стойността на елемента <code>myelement</code>, който е инстанция на
+						<code>$Element</code> класа, който е обхващащ тип за DOM елемента в better-dom. Горният ред код прави
+						няколко неща:
+					</p>
+					<ul>
+						<li>Определя текущото множество от регистрирани езици.</li>
+						<li>
+							За всеки език прочита низ с ключ <code>Hello</code> от вътрешното хранилище на регистрирани езици и
+							използва стоността, за да зададе точния <code>data-i18n-*</code> атрибут за елемента.
+						</li>
+						<li>Изчиства <code>innerHTML</code> съдържанието на елемента.</li>
+					</ul>
+					<p>
+						Целта на <code>i18n</code> метода е да промени специфичните <code>data-*</code> атрибути. Например ако
+						този метод бъде извикан върху празен елемент:
+					</p>
+					<!-- prettier-ignore-start -->
+					<pre>
+<span>&lt;p id="hello"/&gt;</span></pre>
+					<!-- prettier-ignore-end -->
+					<p>
+						то след извикването елементът ще прибодие следния вид ако имаме регистрирани всички низове за немски и
+						руски:
+					</p>
+					<!-- prettier-ignore-start -->
+					<pre>
+<span>&lt;p id="hello" data-i18n="Hello" data-i18n-de="Hallo" data-i18n-ru="Привет"/&gt;</span></pre>
+					<!-- prettier-ignore-end -->
+					<p>Освен това, този метод поддържа опционален втори аргумент, ключ-стойност карта на променливете:</p>
+					<!-- prettier-ignore-start -->
+					<pre>
+// Use {varName} in the string template to define
+// various parts of a localized string.
+myelement.i18n("Hello {user}", {user: username});
+// Use array and {varNumber} to define a numeric
+// set of variables.
+myelement.i18n("Hello {0}", [username]);</pre
+					>
+					<!-- prettier-ignore-end -->
+					<p>
+						За да регистритаме локализиран низ, използваме статичния метод <code>DOM.importStrings</code> като
+						подаваме следните аргументи:
+					</p>
+					<ul>
+						<li>Език</li>
+						<li>Ключ (обикновено на английски)</li>
+						<li>Стойността за дадения език</li>
+					</ul>
+					<p>
+						За примера от по-горе, преди да извикаме <code>i18n</code> метода, ще се наложи да се направят следните
+						извиквания:
+					</p>
+					<!-- prettier-ignore-start -->
+					<pre>
+DOM.importStrings("de", "Hello {user}", "Hallo {user}");
+DOM.importStrings("ru", "Hello {user}", "Привет {user}");
+
+DOM.importStrings("de", "Hello {0}", "Hallo {0}");
+DOM.importStrings("ru", "Hello {0}", "Привет {0}")</pre
+					>
+					<!-- prettier-ignore-end -->
+					<p>
+						През това време функцията преминава през няколко стъпки. Първо, проверява дали подаденият език е
+						регистриран и ако не е го регистрира. След това запазва ключ-стойност двойката във вътрешната памет.
+					</p>
+					<p>
+						Както стана ясно, тези помощни методи освобождават от задължението да се пише шаблонен код и позволява
+						лесното използване на CSS интернационализация.
+					</p>
+				</article>
+			</section>
+
+			<section id="advantages">
+				<header>
+					<h2>Ползи от CSS интернационализацията</h2>
+				</header>
+				<article>
+					<p>Нека разгледаме някои от проблемите, които са описани в началото на реферата</p>
+					<h3>Натрапчива ли е?</h3>
+					<p>
+						При първоначалното решение на проблема се налагаше да правим допълнително извикване на JavaScript функция
+						ако текущия език на страницата е различен от този по подразбиране. Голямо предимство на CSS
+						интернационализацията е, че използва псевдо-класът <code>:lang</code>, за да премине към таргетирания
+						език. Това означава, че е напълно достатъчно само да имаме правилна стойност на този псевдо-клас. Така че
+						може да се каже, че CSS интернационализацията не е натрапчива.
+					</p>
+					<h3>Ефективна ли е?</h3>
+					<p>
+						За да се смени езика динамично се налагаше да се извика специфична функция или дори да се промени DOM-a на
+						всеки свързан елемент спрямо новия език. Сега репрезентацията на даден елемент се осъществява от
+						Псевдо-елемента <code>::before</code>. За да се смени към друг език, единственото необходимо нещо е да се
+						промени стойността на <code>lang</code> атрибута. Това означава, че този подход е доста по-ефективен.
+					</p>
+				</article>
+			</section>
+
+			<section id="disadvantages">
+				<header>
+					<h2>Ограничения на CSS интернационализацията</h2>
+				</header>
+				<article>
+					<p>И все пак има някои недостатъци...</p>
+					<h3>JavaScript</h3>
+					<p>
+						Решението се основава на JavaScript код. Слагането на локализираните низове директно в HTML кода не е
+						добра идея, понеже ще се наруши семантичността. Поради тази причина е препоръчително да се използват
+						множества от JavaScript API-та, за да се използва този подход.
+					</p>
+					<p>
+						Важно е да се отбележи, че подхода е добре да се използва на места, които не са критични за SEO
+						оптимизациите, понеже затруднява индексирането.
+					</p>
+					<h3>Псевдо-елементи</h3>
+					<p>Има и някои ограничения, използвайки <code>::before</code> и <code>::after</code> псевдо-елементите:</p>
+					<ol>
+						<li>
+							Свойството <code>content</code> не се поддържа от празни елементи или някои елементи за форми като
+							<code>::input</code> и <code>::select</code>.
+						</li>
+						<li>Свойството <code>content</code> не може да визуализира HTML тагове.</li>
+						<li>
+							Няма начин да се локализират стойностите на някои HTML атрибути като <code>placeholder</code> и
+							<code>title</code>.
+						</li>
+					</ol>
+				</article>
+			</section>
+
+			<section id="conclusion">
+				<header>
+					<h2>Заключение</h2>
+				</header>
+				<article>
+					<p>
+						CSS интернационализацията е един от различните начини за прилагане на интернационализация към даден уеб
+						сайт. Има си своите предимства и недостатъци, но се отличава с простотата и елегантността на решението,
+						което предоставя. По време на измислянето на решението авторът споделя, че е вдъхновен от някои идеи,
+						съдържащи се в CSS2 спецификацията.
+					</p>
+				</article>
+			</section>
+
+			<section id="example">
+				<header>
+					<h2>Пример</h2>
+				</header>
+				<article>
+					<p>
+						Нека разгледаме и практически как може да се постигне интернационализация, използвайки CSS. От бутона
+						по-долу може да се сменя стойността на атрибута <code>lang</code>. Съответната промяна ще се отразни на
+						символите за кавички, а за някои езици и за шрифтовете.
+					</p>
+					<div id="change-lang">
+						<label for="select-lang">Избери език:</label>
+						<select class="select-lang" id="select-lang">
+							<option value="af">Африканс</option>
+							<option value="ak">Акан</option>
+							<option value="ar">Арабски</option>
+							<option value="bg" selected="selected">Български</option>
+							<option value="bn">Бенгалски</option>
+							<option value="cs">Чешки</option>
+							<option value="da">Датски</option>
+							<option value="de">Немски</option>
+							<option value="el">Гръцки</option>
+							<option value="en-GB">Английски</option>
+							<option value="es">Испански</option>
+							<option value="fa">Персийски</option>
+							<option value="fi">Финландски</option>
+							<option value="fr">Френски</option>
+							<option value="hr">Хърватски</option>
+							<option value="is">Исландски</option>
+							<option value="ja">Японски</option>
+							<option value="km">Кхмерски</option>
+							<option value="ko">Корейски</option>
+							<option value="lt">Литовски</option>
+							<option value="nl">Холандски</option>
+							<option value="pl">Полски</option>
+							<option value="ro">Румънски</option>
+							<option value="sk">Словашки</option>
+							<option value="sq">Албански</option>
+							<option value="sr">Сръбски</option>
+							<option value="sv">Шведски</option>
+							<option value="tr">Турски</option>
+							<option value="vi">Виетнамски</option>
+							<option value="zh">Китайски</option>
+						</select>
+					</div>
+					<p>
+						<q>Следният текст е примерен</q>. Целта му е
+						<q>да демонстрира промяната на <q>символите за кавички</q> спрямо</q> различните <q>езици</q>.
+					</p>
+					<p>
+						Но за да работи интернационализацията на кавички, те трябва да бъдат въвеждани чрез тага &lt;q&gt;, а не
+						чрез изписването на символа за кавички.
+					</p>
+				</article>
+			</section>
+		</section>
+
+		<footer id="references">
+			<h2>Източници</h2>
+			<p id="ref-1">
+				[1] CSS-Driven Internationalization In JavaScript, [<a
+					href="https://www.smashingmagazine.com/2014/06/css-driven-internationalization-in-javascript/"
+					target="_blank"
+					>CSS i18n</a
+				>], последно посетен на 11.04.2022
+			</p>
+			<p id="ref-2">
+				[2] Internationalization Language CSS, [<a
+					href="https://css-tricks.com/snippets/css/internationalization-language-css/"
+					target="_blank"
+					>i18n language CSS</a
+				>], последно посетен на 11.04.2022
+			</p>
+		</footer>
+	</body>
+</html>
