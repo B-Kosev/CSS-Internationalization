@@ -3,7 +3,7 @@ html {
 }
 
 body {
-	background-color: #fff1e6;
+	background-color: #def4ff;
 	font-size: 1.2rem;
 	font-family: Roboto, roboto slab, droid serif, segoe ui, system-ui, Arial, sans-serif;
 }
@@ -57,12 +57,13 @@ code {
 }
 
 code {
-	background-color: #eddcd2;
+	background-color: #4691c0;
+	color: #ffffff;
 }
 
 pre {
-	background-color: #f0efeb;
-	border: 1px solid #a5a58d;
+	background-color: hsla(0, 0%, 87%, 0.363);
+	border: 1px solid black;
 }
 
 header {
@@ -110,6 +111,7 @@ footer {
 #navigation a {
 	text-decoration: none;
 	color: black;
+	border-bottom: 3px solid #4691c0;
 }
 
 #navigation a:hover {
@@ -119,6 +121,10 @@ footer {
 
 #navigation ol {
 	list-style: none;
+}
+
+#navigation li {
+	margin-bottom: 5px;
 }
 
 /* === Animations === */
