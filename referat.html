@@ -8,11 +8,11 @@
 			integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 			crossorigin="anonymous"
 		></script>
-		<link href="./css/index.css" rel="stylesheet" />
+		<link href="./css/referat.css" rel="stylesheet" />
 		<link href="./css/lang.css" rel="stylesheet" />
 		<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 		<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-		<script src="./js/index.js"></script>
+		<script src="./javascript/referat.js"></script>
 	</head>
 	<body>
 		<header>
@@ -74,6 +74,7 @@
 				<figure>
 					<a
 						href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/705e2214-dc88-4ff3-aca1-2feb74029666/01-messages-opt.gif"
+						target="_blank"
 					>
 						<img
 							src="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/705e2214-dc88-4ff3-aca1-2feb74029666/01-messages-opt.gif"
@@ -84,7 +85,7 @@
 					</a>
 					<figcaption>
 						<p>
-							Съобщенията по подразбиране се съхраняват в обекта
+							Фигура 1. Съобщенията по подразбиране се съхраняват в обекта
 							<code>$.tools.validator.messages</code><a href="#ref-1">[1]</a>
 						</p>
 					</figcaption>
@@ -113,6 +114,7 @@ $.tools.validator.localize("fi", {
 				<figure>
 					<a
 						href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/d0d8a470-f7b1-4e99-b8a8-691e18930da4/02-messages-fi-opt.gif"
+						target="_blank"
 					>
 						<img
 							src="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/d0d8a470-f7b1-4e99-b8a8-691e18930da4/02-messages-fi-opt.gif"
@@ -123,7 +125,7 @@ $.tools.validator.localize("fi", {
 					</a>
 					<figcaption>
 						<p>
-							<code>$.tools.validator.messages</code> обекта с попълнени съобщения на финландски език.
+							Фигура 2. <code>$.tools.validator.messages</code> обекта с попълнени съобщения на финландски език.
 							<a href="#ref-1">[1]</a>
 						</p>
 					</figcaption>
@@ -171,8 +173,8 @@ $.tools.validator.localize("fi", {
 						неговия език.
 					</blockquote>
 					<p>
-						Типичен пример цитиран в спецификацията е символът за цитат, който се различава в различните езици. Ето
-						как може да се използва заедно с тагът <code>&ltq&gt</code>:
+						Типичен пример цитиран в спецификацията са символите за кавички, които се различават в различните езици. Ето
+						как може да се използва заедно с тага <code>&ltq&gt</code>:
 					</p>
 					<!-- prettier-ignore-start -->
 					<pre>
@@ -203,7 +205,7 @@ $.tools.validator.localize("fi", {
 						прости, но разрешават редица проблеми по доста изчистен начин.
 					</p>
 					<p>
-						И двата Псевдо-елемента въвеждат свойство <code>content</code>, което определя какво съдържание да се
+						И двата псевдо-елемента въвеждат свойство <code>content</code>, което определя какво съдържание да се
 						добави преди или след елемента. Стойностите му може да са следните:
 					</p>
 					<ul>
@@ -232,12 +234,12 @@ $.tools.validator.localize("fi", {
 					>
 					<!-- prettier-ignore-end -->
 					<p>
-						В този случай браузърът ще покаже <code>hello world</code> с малко <code>h</code> понеже стойността на атрибута <code>id</code> е с малки
-						букви.
+						В този случай браузърът ще покаже <code>hello world</code> с малко <code>h</code> понеже стойността на
+						атрибута <code>id</code> е с малки букви.
 					</p>
 					<p>
 						Нека сега си представим, че елементът няма никакво съдържание. В такъв случай можем изцяло да променяме
-						съдържанието му използвайки CSS заедно с Псевдо-класа <code>:lang</code>
+						съдържанието му използвайки CSS заедно с псевдо-класа <code>:lang</code>
 					</p>
 					<!-- prettier-ignore-start -->
 					<pre>
@@ -273,8 +275,8 @@ $.tools.validator.localize("fi", {
 						текст в различни езици.
 					</p>
 					<p>
-						Нека пренапишем горния пример с елемента <code>hello</code> използвайки новия подобрен метод. Този път ще напишем
-						глобален CSS, който да поддържа английски, немски и руски език:
+						Нека пренапишем горния пример с елемента <code>hello</code> използвайки новия подобрен метод. Този път ще
+						напишем глобален CSS, който да поддържа английски, немски и руски език:
 					</p>
 					<!-- prettier-ignore-start -->
 					<pre>
@@ -294,8 +296,8 @@ $.tools.validator.localize("fi", {
 					<!-- prettier-ignore-end -->
 					<p>
 						По този начин вместо да слагаме конкретни низове в CSS-a, добавяме няколко нови атрибута, съдържащи
-						правилния низ за съответния език. Елементът <code>hello</code> сега би трябвало да изглежда по следния начин, за да
-						поддържа различните езици:
+						правилния низ за съответния език. Елементът <code>hello</code> сега би трябвало да изглежда по следния
+						начин, за да поддържа различните езици:
 					</p>
 					<!-- prettier-ignore-start -->
 					<pre>
@@ -414,7 +416,7 @@ DOM.importStrings("ru", "Hello {0}", "Привет {0}")</pre
 					<p>
 						За да се смени езика динамично се налагаше да се извика специфична функция или дори да се промени DOM-a на
 						всеки свързан елемент спрямо новия език. Сега репрезентацията на даден елемент се осъществява от
-						Псевдо-елемента <code>::before</code>. За да се смени към друг език, единственото необходимо нещо е да се
+						псевдо-елемента <code>::before</code>. За да се смени към друг език, единственото необходимо нещо е да се
 						промени стойността на <code>lang</code> атрибута. Това означава, че този подход е доста по-ефективен.
 					</p>
 				</article>
@@ -514,6 +516,7 @@ DOM.importStrings("ru", "Hello {0}", "Привет {0}")</pre
 					<p>
 						<q>Следният текст е примерен</q>. Целта му е
 						<q>да демонстрира промяната на <q>символите за кавички</q> спрямо</q> различните <q>езици</q>.
+						<a href="#ref-2">[2]</a>
 					</p>
 					<p>
 						Но за да работи интернационализацията на кавички, те трябва да бъдат въвеждани чрез тага &lt;q&gt;, а не
@@ -526,18 +529,16 @@ DOM.importStrings("ru", "Hello {0}", "Привет {0}")</pre
 		<footer id="references">
 			<h2>Източници</h2>
 			<p id="ref-1">
-				[1] CSS-Driven Internationalization In JavaScript, [<a
-					href="https://www.smashingmagazine.com/2014/06/css-driven-internationalization-in-javascript/"
-					target="_blank"
-					>CSS i18n</a
-				>], последно посетен на 11.04.2022
+				[1] Maksim Chemerisuk,
+				<a href="https://www.smashingmagazine.com/2014/06/css-driven-internationalization-in-javascript/" target="_blank"
+					>"CSS-Driven Internationalization In JavaScript"</a
+				>, последно посетен на 11.04.2022
 			</p>
 			<p id="ref-2">
-				[2] Internationalization Language CSS, [<a
-					href="https://css-tricks.com/snippets/css/internationalization-language-css/"
-					target="_blank"
-					>i18n language CSS</a
-				>], последно посетен на 11.04.2022
+				[2] Chris Coyier,
+				<a href="https://css-tricks.com/snippets/css/internationalization-language-css/" target="_blank"
+					>"Internationalization Language CSS"</a
+				>, последно посетен на 11.04.2022
 			</p>
 		</footer>
 	</body>

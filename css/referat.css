@@ -86,6 +86,7 @@ footer > p {
 footer {
 	border-top: 1px solid gray;
 	text-align: center;
+	animation: content-load 4s ease-out 0s;
 }
 
 .select-lang {
