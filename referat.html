@@ -3,16 +3,16 @@
 	<head>
 		<meta charset="UTF-8" />
 		<title>Frontend интернационализация на уеб приложения</title>
-		<script
-			src="https://code.jquery.com/jquery-3.6.0.min.js"
-			integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-			crossorigin="anonymous"
-		></script>
 		<link href="./css/referat.css" rel="stylesheet" />
 		<link href="./css/lang.css" rel="stylesheet" />
 		<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-		<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-		<script src="./javascript/referat.js"></script>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/atom-one-dark.min.css"
+			integrity="sha512-Jk4AqjWsdSzSWCSuQTfYRIF84Rq/eV0G2+tu07byYwHcbTGfdmLrHjUSwvzp5HvbiqK4ibmNwdcG49Y5RGYPTg=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
 	</head>
 	<body>
 		<header>
@@ -34,6 +34,7 @@
 				<li><a href="#conclusion">Заключение</a></li>
 				<li><a href="#example">Пример</a></li>
 				<li><a href="#references">Източници</a></li>
+				<li><a href="#libs">Използвани библиотеки</a></li>
 			</ol>
 		</nav>
 
@@ -99,14 +100,13 @@
 					както следва:
 				</p>
 				<!-- prettier-ignore-start -->
-				<pre>
+				<pre><code class="javascript">
 $.tools.validator.localize("fi", { 
     ":email" : "Virheellinen s&auml;hk&ouml;postiosoite", 
     ":number" : "Arvon on oltava numeerinen", 
     "[max]" : "Arvon on oltava pienempi, kuin $1", 
     "[min]" : "Arvon on oltava suurempi, kuin $1",
-    "[required]" : "Kent&auml;n arvo on annettava" });</pre
-				>
+    "[required]" : "Kent&auml;n arvo on annettava" });</code></pre>
 				<!-- prettier-ignore-end -->
 				<p>
 					Този метод попълва съобщенията на финландски език.
@@ -138,7 +138,7 @@ $.tools.validator.localize("fi", {
 					<code>lang</code>
 					опцията:
 				</p>
-				<pre>$("#myForm").validator({lang: "fi"});</pre>
+				<pre><code class="javascript">$("#myForm").validator({lang: "fi"});</code></pre>
 				<p>Плъгина, както и подобни на него, имплементират типично решение, но имат няколко недостатъка:</p>
 				<ol>
 					<li>
@@ -179,10 +179,9 @@ $.tools.validator.localize("fi", {
 						Ето как може да се използва заедно с тага <code>&ltq&gt</code>:
 					</p>
 					<!-- prettier-ignore-start -->
-					<pre>
+					<pre><code class="css">
 :lang(fr) > q { quotes: '« ' ' »' }
-:lang(de) > q { quotes: '»' '«' '\2039' '\203A' }</pre
-					>
+:lang(de) > q { quotes: '»' '«' '\2039' '\203A' }</code></pre>
 					<!-- prettier-ignore-end -->
 					<p>
 						Примерът отгоре показва как може да се промени визуализацията на дадено съдържание спрямо текущия език
@@ -218,22 +217,20 @@ $.tools.validator.localize("fi", {
 					</ul>
 					<p>Осново ще се занимаваме с добавянето на текст. Нека имаме следния пример:</p>
 					<!-- prettier-ignore-start -->
-					<pre>
+					<pre><code class="css">
 #hello::before {
 	content: "Hello ";
-}</pre
-					>
+}</code></pre>
 					<!-- prettier-ignore-end -->
 					<p>
 						Ако елементът с ID <code>hello</code> съдържа текста <code>world</code>, то браузърът ще покаже
 						<code>Hello world</code>.
 					</p>
 					<p>Бихме могли да пренапишем примера, използвайки <code>attr</code> функцията:</p>
-					<pre>
+					<pre><code class="css">
 #hello::before {
 	content: attr(id) " ";
-}</pre
-					>
+}</code></pre>
 					<!-- prettier-ignore-end -->
 					<p>
 						В този случай браузърът ще покаже <code>hello world</code> с малко <code>h</code> понеже стойността на
@@ -244,7 +241,7 @@ $.tools.validator.localize("fi", {
 						съдържанието му използвайки CSS заедно с псевдо-класа <code>:lang</code>
 					</p>
 					<!-- prettier-ignore-start -->
-					<pre>
+					<pre><code class="css">
 #hello::before {
 	content: "Hello";
 }
@@ -253,8 +250,7 @@ $.tools.validator.localize("fi", {
 }
 #hello:lang(ru)::before {
 	content: "Привет";
-}</pre
-					>
+}</code></pre>
 					<!-- prettier-ignore-end -->
 					<p>
 						По този начин съдържанието на елемента ще се променя спрямо текущия език на уеб страницата - няма нужда да
@@ -281,7 +277,7 @@ $.tools.validator.localize("fi", {
 						напишем глобален CSS, който да поддържа английски, немски и руски език:
 					</p>
 					<!-- prettier-ignore-start -->
-					<pre>
+					<pre><code class="css">
 /* English (default language)*/
 [data-i18n]::before {
 	content: attr(data-i18n);
@@ -293,8 +289,7 @@ $.tools.validator.localize("fi", {
 /* Russian */
 [data-i18n-ru]:lang(ru)::before {
 	content: attr(data-i18n-ru);
-}</pre
-					>
+}</code></pre>
 					<!-- prettier-ignore-end -->
 					<p>
 						По този начин вместо да слагаме конкретни низове в CSS-a, добавяме няколко нови атрибута, съдържащи
@@ -302,8 +297,8 @@ $.tools.validator.localize("fi", {
 						начин, за да поддържа различните езици:
 					</p>
 					<!-- prettier-ignore-start -->
-					<pre>
-<span>&lt;p id="hello" data-i18n="Hello" data-i18n-de="Hallo" data-i18n-ru="Привет"/&gt;</span></pre>
+					<pre><code class="html">
+<span>&lt;p id="hello" data-i18n="Hello" data-i18n-de="Hallo" data-i18n-ru="Привет"/&gt;</span></code></pre>
 					<!-- prettier-ignore-end -->
 					<p>
 						По този начин допълнителният CSS е сведен до минимум, съдържащ само глобалната логика за промяна на
@@ -325,7 +320,7 @@ $.tools.validator.localize("fi", {
 						този начин JavaScript кодът е по-прост и по-четим:
 					</p>
 					<!-- prettier-ignore-start -->
-					<pre>myelement.i18n("Hello");</pre>
+					<pre><code class="javascript">myelement.i18n("Hello");</code></pre>
 					<!-- prettier-ignore-end -->
 					<p>
 						Този код задава стойността на елемента <code>myelement</code>, който е инстанция на
@@ -345,27 +340,26 @@ $.tools.validator.localize("fi", {
 						този метод бъде извикан върху празен елемент:
 					</p>
 					<!-- prettier-ignore-start -->
-					<pre>
-<span>&lt;p id="hello"/&gt;</span></pre>
+					<pre><code class="html">
+<span>&lt;p id="hello"/&gt;</span></code></pre>
 					<!-- prettier-ignore-end -->
 					<p>
 						то след извикването елементът ще прибодие следния вид ако имаме регистрирани всички низове за немски и
 						руски:
 					</p>
 					<!-- prettier-ignore-start -->
-					<pre>
-<span>&lt;p id="hello" data-i18n="Hello" data-i18n-de="Hallo" data-i18n-ru="Привет"/&gt;</span></pre>
+					<pre><code class="html">
+<span>&lt;p id="hello" data-i18n="Hello" data-i18n-de="Hallo" data-i18n-ru="Привет"/&gt;</span></code></pre>
 					<!-- prettier-ignore-end -->
 					<p>Освен това, този метод поддържа опционален втори аргумент, ключ-стойност карта на променливете:</p>
 					<!-- prettier-ignore-start -->
-					<pre>
-// Use {varName} in the string template to define
-// various parts of a localized string.
+					<pre><code class="javascript">
+// Използваме {varName} в шаблона на низа, за да дефинираме
+// различни части от локализирания низ.
 myelement.i18n("Hello {user}", {user: username});
-// Use array and {varNumber} to define a numeric
-// set of variables.
-myelement.i18n("Hello {0}", [username]);</pre
-					>
+// Използваме масив и {varNumber}, за да дефинираме
+// изброимо множество от променливи.
+myelement.i18n("Hello {0}", [username]);</code></pre>
 					<!-- prettier-ignore-end -->
 					<p>
 						За да регистритаме локализиран низ, използваме статичния метод <code>DOM.importStrings</code> като
@@ -381,13 +375,12 @@ myelement.i18n("Hello {0}", [username]);</pre
 						извиквания:
 					</p>
 					<!-- prettier-ignore-start -->
-					<pre>
+					<pre><code class="javascript">
 DOM.importStrings("de", "Hello {user}", "Hallo {user}");
 DOM.importStrings("ru", "Hello {user}", "Привет {user}");
 
 DOM.importStrings("de", "Hello {0}", "Hallo {0}");
-DOM.importStrings("ru", "Hello {0}", "Привет {0}")</pre
-					>
+DOM.importStrings("ru", "Hello {0}", "Привет {0}");</code></pre>
 					<!-- prettier-ignore-end -->
 					<p>
 						През това време функцията преминава през няколко стъпки. Първо, проверява дали подаденият език е
@@ -481,15 +474,14 @@ DOM.importStrings("ru", "Hello {0}", "Привет {0}")</pre
 						ляво.
 					</p>
 					<p>Като добра практика се препоръчва използването на следните свойства и ключови думи:</p>
-					<pre>
+					<pre><code class="css">
 label {
 	margin-right: 0.5em;
 }
 
 label {
 	margin-inline-end: 0.5em;
-}</pre
-					>
+}</code></pre>
 				</article>
 			</section>
 
@@ -509,15 +501,14 @@ label {
 						свойство може да се постигне желания ефект. Като добра практика се препоръчва използването на
 						<code>start</code> и <code>end</code> за стойности.
 					</p>
-					<pre>
+					<pre><code class="css">
 .alignRight{
 	text-align: end;
 }
 
 .alignLeft{
 	text-align: start;
-}</pre
-					>
+}</code></pre>
 				</article>
 			</section>
 
@@ -566,7 +557,7 @@ label {
 							<option id="jp" value="ja">Японски</option>
 							<option id="kh" value="km">Кхмерски</option>
 							<option id="kr" value="ko">Корейски</option>
-							<option id="lt" value="lt">Литовски</optioni>
+							<option id="lt" value="lt">Литовски</option>
 							<option id="nl" value="nl">Холандски</option>
 							<option id="pl" value="pl">Полски</option>
 							<option id="ro" value="ro">Румънски</option>
@@ -606,15 +597,37 @@ label {
 					>"Internationalization Language CSS"</a
 				>, последно посетен на 11.04.2022
 			</p>
-			<p id="ref-3">[3] <a href="https://web.dev/learn/design/internationalization/" target="_blank"
-					>"Internationalization"</a
-				>, последно посетен на 02.05.2022</p>
+			<p id="ref-3">
+				[3] <a href="https://web.dev/learn/design/internationalization/" target="_blank">"Internationalization"</a>,
+				последно посетен на 02.05.2022
+			</p>
 			<p id="ref-4">
 				[4] Anil Verma,
-				<a href="https://hackernoon.com/internationalization-in-css" target="_blank"
-					>"Internationalization in CSS"</a
-				>, последно посетен на 02.05.2022
+				<a href="https://hackernoon.com/internationalization-in-css" target="_blank">"Internationalization in CSS"</a>,
+				последно посетен на 02.05.2022
 			</p>
 		</section>
+
+		<section id="libs">
+			<h2>Използвани библиотеки</h2>
+			<p><a href="https://jquery.com/" target="_blank">jQuery</a></p>
+			<p><a href="https://select2.org/" target="_blank">Select2</a></p>
+			<p><a href="https://github.com/HatScripts/circle-flags" target="_blank">Circle Flags</a></p>
+			<p><a href="https://highlightjs.org/" target="_blank">highlight.js</a></p>
+		</section>
+
+		<script
+			src="https://code.jquery.com/jquery-3.6.0.min.js"
+			integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+			crossorigin="anonymous"
+		></script>
+		<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+		<script src="./javascript/referat.js"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"
+			integrity="sha512-yUUc0qWm2rhM7X0EFe82LNnv2moqArj5nro/w1bi05A09hRVeIZbN6jlMoyu0+4I/Bu4Ck/85JQIU82T82M28w=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script>
 	</body>
 </html>
