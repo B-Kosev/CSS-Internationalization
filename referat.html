@@ -29,6 +29,8 @@
 				<li><a href="#api">API от високо ниво</a></li>
 				<li><a href="#advantages">Ползи</a></li>
 				<li><a href="#disadvantages">Недостатъци</a></li>
+				<li><a href="#logical-properties">Логически свойства</a></li>
+				<li><a href="#text-align">Подредба на текста</a></li>
 				<li><a href="#conclusion">Заключение</a></li>
 				<li><a href="#example">Пример</a></li>
 				<li><a href="#references">Източници</a></li>
@@ -173,8 +175,8 @@ $.tools.validator.localize("fi", {
 						неговия език.
 					</blockquote>
 					<p>
-						Типичен пример цитиран в спецификацията са символите за кавички, които се различават в различните езици. Ето
-						как може да се използва заедно с тага <code>&ltq&gt</code>:
+						Типичен пример цитиран в спецификацията са символите за кавички, които се различават в различните езици.
+						Ето как може да се използва заедно с тага <code>&ltq&gt</code>:
 					</p>
 					<!-- prettier-ignore-start -->
 					<pre>
@@ -454,6 +456,71 @@ DOM.importStrings("ru", "Hello {0}", "Привет {0}")</pre
 				</article>
 			</section>
 
+			<section id="logical-properties">
+				<header>
+					<h2>Логически свойства</h2>
+				</header>
+				<article>
+					<p>
+						Английският език се пише и чете от ляво на дясно и от горе на долу, но не всички езици са така. Някои
+						езици като арабски и иврит се пишат и четат от дясно на ляво, а някои японски шрифтове се пишат и четат
+						вертикално вместо хоризонтално. За да се адресират тези осоености в CSS са въведени логическите свойства.
+					</p>
+					<p>
+						Първоначално всеки би използвал в CSS клюочови думи като <code>left</code>, <code>right</code>,
+						<code>top</code> и <code>bottom</code>. Тези ключови думи се отнасят за физическото оформление на
+						устройството на потребителя. От друга страна, логическите свойства реферират краищата на кутия
+						съобразявайки се с посоката на текста. Ако режимът на писане на текст се промени, логическите свойства
+						също ще се променят.
+					</p>
+					<p>
+						Предният абзац прозвуча малко абстрактно, затова сега ще погледнем конкретен пример. Свойството
+						<code>margin-left</code> винаги се отнася за маржа от лявата страна на някакъв елемент. От друга страна
+						свойството <code>margin-inline-start</code> се отнася за маржа от лявата страна на елемент, когато езикът
+						се чете от ляво на дясно, или за маржа от дясната страна на елемент, когато езикът се чете от дясно на
+						ляво.
+					</p>
+					<p>Като добра практика се препоръчва използването на следните свойства и ключови думи:</p>
+					<pre>
+label {
+	margin-right: 0.5em;
+}
+
+label {
+	margin-inline-end: 0.5em;
+}</pre
+					>
+				</article>
+			</section>
+
+			<section id="text-align">
+				<header>
+					<h2>Подредба на текста, използвайки <code>text-align</code></h2>
+				</header>
+				<article>
+					<p>
+						В много езици текстът се подравнява от ляво на дясно (напр. английски, бългаски), но също така в много
+						езици текстът се подравнява от дясно на ляво (напр. френски). Следователно приложението/уебсайта трябва да
+						модифицира подредбата на текста спрямо текущия език.
+					</p>
+					<p>
+						Нека предположим, че имаме свойството <code>text-align: right;</code>. За английски език би работило
+						коректно, но за френски език би трябвало да използваме <code>text-align: left;</code>. Така с това
+						свойство може да се постигне желания ефект. Като добра практика се препоръчва използването на
+						<code>start</code> и <code>end</code> за стойности.
+					</p>
+					<pre>
+.alignRight{
+	text-align: end;
+}
+
+.alignLeft{
+	text-align: start;
+}</pre
+					>
+				</article>
+			</section>
+
 			<section id="conclusion">
 				<header>
 					<h2>Заключение</h2>
@@ -481,36 +548,35 @@ DOM.importStrings("ru", "Hello {0}", "Привет {0}")</pre
 					<div id="change-lang">
 						<label for="select-lang">Избери език:</label>
 						<select class="select-lang" id="select-lang">
-							<option value="af">Африканс</option>
-							<option value="ak">Акан</option>
-							<option value="ar">Арабски</option>
-							<option value="bg" selected="selected">Български</option>
-							<option value="bn">Бенгалски</option>
-							<option value="cs">Чешки</option>
-							<option value="da">Датски</option>
-							<option value="de">Немски</option>
-							<option value="el">Гръцки</option>
-							<option value="en-GB">Английски</option>
-							<option value="es">Испански</option>
-							<option value="fa">Персийски</option>
-							<option value="fi">Финландски</option>
-							<option value="fr">Френски</option>
-							<option value="hr">Хърватски</option>
-							<option value="is">Исландски</option>
-							<option value="ja">Японски</option>
-							<option value="km">Кхмерски</option>
-							<option value="ko">Корейски</option>
-							<option value="lt">Литовски</option>
-							<option value="nl">Холандски</option>
-							<option value="pl">Полски</option>
-							<option value="ro">Румънски</option>
-							<option value="sk">Словашки</option>
-							<option value="sq">Албански</option>
-							<option value="sr">Сръбски</option>
-							<option value="sv">Шведски</option>
-							<option value="tr">Турски</option>
-							<option value="vi">Виетнамски</option>
-							<option value="zh">Китайски</option>
+							<option id="za" value="af">Африканс</option>
+							<option id="gh" value="ak">Акан</option>
+							<option id="sa" value="ar">Арабски</option>
+							<option id="bg" value="bg" selected="selected">Български</option>
+							<option id="cz" value="cs">Чешки</option>
+							<option id="dk" value="da">Датски</option>
+							<option id="de" value="de">Немски</option>
+							<option id="gr" value="el">Гръцки</option>
+							<option id="gb" value="en-GB">Английски</option>
+							<option id="es" value="es">Испански</option>
+							<option id="ir" value="fa">Персийски</option>
+							<option id="fi" value="fi">Финландски</option>
+							<option id="fr" value="fr">Френски</option>
+							<option id="hr" value="hr">Хърватски</option>
+							<option id="is" value="is">Исландски</option>
+							<option id="jp" value="ja">Японски</option>
+							<option id="kh" value="km">Кхмерски</option>
+							<option id="kr" value="ko">Корейски</option>
+							<option id="lt" value="lt">Литовски</optioni>
+							<option id="nl" value="nl">Холандски</option>
+							<option id="pl" value="pl">Полски</option>
+							<option id="ro" value="ro">Румънски</option>
+							<option id="sk" value="sk">Словашки</option>
+							<option id="al" value="sq">Албански</option>
+							<option id="rs" value="sr">Сръбски</option>
+							<option id="se" value="sv">Шведски</option>
+							<option id="tr" value="tr">Турски</option>
+							<option id="vn" value="vi">Виетнамски</option>
+							<option id="cn" value="zh">Китайски</option>
 						</select>
 					</div>
 					<p>
@@ -526,7 +592,7 @@ DOM.importStrings("ru", "Hello {0}", "Привет {0}")</pre
 			</section>
 		</section>
 
-		<footer id="references">
+		<section id="references">
 			<h2>Източници</h2>
 			<p id="ref-1">
 				[1] Maksim Chemerisuk,
@@ -540,6 +606,15 @@ DOM.importStrings("ru", "Hello {0}", "Привет {0}")</pre
 					>"Internationalization Language CSS"</a
 				>, последно посетен на 11.04.2022
 			</p>
-		</footer>
+			<p id="ref-3">[3] <a href="https://web.dev/learn/design/internationalization/" target="_blank"
+					>"Internationalization"</a
+				>, последно посетен на 02.05.2022</p>
+			<p id="ref-4">
+				[4] Anil Verma,
+				<a href="https://hackernoon.com/internationalization-in-css" target="_blank"
+					>"Internationalization in CSS"</a
+				>, последно посетен на 02.05.2022
+			</p>
+		</section>
 	</body>
 </html>
