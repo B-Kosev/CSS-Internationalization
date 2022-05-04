@@ -14,6 +14,22 @@ $(document).ready(function () {
 		document.documentElement.setAttribute("lang", data.id);
 		console.log("Language changed to " + data.text);
 	});
+
+	// Scroll to top button
+	$("#btnTop").hide();
+
+	$(window).scroll(function () {
+		if ($(this).scrollTop() > 100) {
+			$("#btnTop").show().fadeIn();
+		} else {
+			$("#btnTop").fadeOut().hide();
+		}
+	});
+
+	$("#btnTop").click(function () {
+		$("html, body").animate({ scrollTop: 0 }, 360);
+		return false;
+	});
 });
 
 function format(item) {

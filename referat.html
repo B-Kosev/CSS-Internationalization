@@ -3,7 +3,8 @@
 	<head>
 		<meta charset="UTF-8" />
 		<title>Frontend интернационализация на уеб приложения</title>
-		<link href="./css/referat.css" rel="stylesheet" />
+		<!-- <link href="./css/referat.css" rel="stylesheet" /> -->
+		<link href="./css/style.css" rel="stylesheet" />
 		<link href="./css/lang.css" rel="stylesheet" />
 		<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 		<link
@@ -13,14 +14,15 @@
 			crossorigin="anonymous"
 			referrerpolicy="no-referrer"
 		/>
+		<script src="https://kit.fontawesome.com/0138e10fbd.js" crossorigin="anonymous"></script>
 	</head>
-	<body>
-		<header>
+	<body class="container">
+		<header class="header">
 			<h1>Интернационализация на текст, използвайки CSS</h1>
 		</header>
 
-		<nav id="navigation">
-			<ol>
+		<aside class="nav">
+			<ul>
 				<li><a href="#intro">Въведение</a></li>
 				<li><a href="#typical-solution">Едно типично решение</a></li>
 				<li><a href="#lang-class">Псевдо-класът :lang</a></li>
@@ -35,10 +37,10 @@
 				<li><a href="#example">Пример</a></li>
 				<li><a href="#references">Източници</a></li>
 				<li><a href="#libs">Използвани библиотеки</a></li>
-			</ol>
-		</nav>
+			</ul>
+		</aside>
 
-		<section id="content">
+		<section class="content">
 			<section id="intro">
 				<header>
 					<h2>Въведение</h2>
@@ -536,7 +538,7 @@ label {
 						по-долу може да се сменя стойността на атрибута <code>lang</code>. Съответната промяна ще се отразни на
 						символите за кавички, а за някои езици и за шрифтовете.
 					</p>
-					<div id="change-lang">
+					<section id="change-lang">
 						<label for="select-lang">Избери език:</label>
 						<select class="select-lang" id="select-lang">
 							<option id="za" value="af">Африканс</option>
@@ -569,7 +571,7 @@ label {
 							<option id="vn" value="vi">Виетнамски</option>
 							<option id="cn" value="zh">Китайски</option>
 						</select>
-					</div>
+					</section>
 					<p>
 						<q>Следният текст е примерен</q>. Целта му е
 						<q>да демонстрира промяната на <q>символите за кавички</q> спрямо</q> различните <q>езици</q>.
@@ -581,40 +583,45 @@ label {
 					</p>
 				</article>
 			</section>
+
+			<section id="references">
+				<h2>Източници</h2>
+				<p id="ref-1">
+					[1] Maksim Chemerisuk,
+					<a
+						href="https://www.smashingmagazine.com/2014/06/css-driven-internationalization-in-javascript/"
+						target="_blank"
+						>"CSS-Driven Internationalization In JavaScript"</a
+					>, последно посетен на 11.04.2022
+				</p>
+				<p id="ref-2">
+					[2] Chris Coyier,
+					<a href="https://css-tricks.com/snippets/css/internationalization-language-css/" target="_blank"
+						>"Internationalization Language CSS"</a
+					>, последно посетен на 11.04.2022
+				</p>
+				<p id="ref-3">
+					[3] <a href="https://web.dev/learn/design/internationalization/" target="_blank">"Internationalization"</a>,
+					последно посетен на 02.05.2022
+				</p>
+				<p id="ref-4">
+					[4] Anil Verma,
+					<a href="https://hackernoon.com/internationalization-in-css" target="_blank">"Internationalization in CSS"</a
+					>, последно посетен на 02.05.2022
+				</p>
+			</section>
+
+			<section id="libs">
+				<h2>Използвани библиотеки</h2>
+				<p><a href="https://jquery.com/" target="_blank">jQuery</a> - улеснява и опростява писането на JavaScript код</p>
+				<p><a href="https://select2.org/" target="_blank">Select2</a> - заменя обикновените select box-ове с интерактивни такива, поддържащи търсене, тагване, безкрайно скролиране и др.</p>
+				<p><a href="https://github.com/HatScripts/circle-flags" target="_blank">Circle Flags</a> - колекция с над 300 кръгли минималистични флагове</p>
+				<p><a href="https://highlightjs.org/" target="_blank">highlight.js</a> - оцветява сегменти с код в сайтове</p>
+				<p><a href="https://fontawesome.com/" target="_blank">Font Awesome</a> - библиотека с различни икони</p>
+			</section>
 		</section>
 
-		<section id="references">
-			<h2>Източници</h2>
-			<p id="ref-1">
-				[1] Maksim Chemerisuk,
-				<a href="https://www.smashingmagazine.com/2014/06/css-driven-internationalization-in-javascript/" target="_blank"
-					>"CSS-Driven Internationalization In JavaScript"</a
-				>, последно посетен на 11.04.2022
-			</p>
-			<p id="ref-2">
-				[2] Chris Coyier,
-				<a href="https://css-tricks.com/snippets/css/internationalization-language-css/" target="_blank"
-					>"Internationalization Language CSS"</a
-				>, последно посетен на 11.04.2022
-			</p>
-			<p id="ref-3">
-				[3] <a href="https://web.dev/learn/design/internationalization/" target="_blank">"Internationalization"</a>,
-				последно посетен на 02.05.2022
-			</p>
-			<p id="ref-4">
-				[4] Anil Verma,
-				<a href="https://hackernoon.com/internationalization-in-css" target="_blank">"Internationalization in CSS"</a>,
-				последно посетен на 02.05.2022
-			</p>
-		</section>
-
-		<section id="libs">
-			<h2>Използвани библиотеки</h2>
-			<p><a href="https://jquery.com/" target="_blank">jQuery</a></p>
-			<p><a href="https://select2.org/" target="_blank">Select2</a></p>
-			<p><a href="https://github.com/HatScripts/circle-flags" target="_blank">Circle Flags</a></p>
-			<p><a href="https://highlightjs.org/" target="_blank">highlight.js</a></p>
-		</section>
+		<button id="btnTop"><i class="fa-solid fa-arrow-up"></i></button>
 
 		<script
 			src="https://code.jquery.com/jquery-3.6.0.min.js"
