@@ -143,6 +143,10 @@ figcaption {
 	width: 250px;
 }
 
+.libs li {
+	margin-bottom: 0.5rem;
+}
+
 #btnTop {
 	display: none;
 	position: fixed;
