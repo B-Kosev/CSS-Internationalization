@@ -1,6 +1,4 @@
 $(document).ready(function () {
-	// $(".select-lang").select2();
-
 	hljs.highlightAll();
 
 	$(".select-lang").select2({

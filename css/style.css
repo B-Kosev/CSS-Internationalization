@@ -143,8 +143,15 @@ figcaption {
 	width: 250px;
 }
 
-.libs li {
-	margin-bottom: 0.5rem;
+figure img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.refs,
+.libs {
+	font-size: 1rem;
 }
 
 #btnTop {
@@ -206,6 +213,11 @@ figcaption {
 	}
 
 	pre code {
+		font-size: 0.8rem;
+	}
+
+	.refs,
+	.libs {
 		font-size: 0.8rem;
 	}
 

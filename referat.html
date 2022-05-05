@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<title>Frontend интернационализация на уеб приложения</title>
-		<!-- <link href="./css/referat.css" rel="stylesheet" /> -->
+		<!-- <link href="./css/ols_referat.css" rel="stylesheet" /> -->
 		<link href="./css/style.css" rel="stylesheet" />
 		<link href="./css/lang.css" rel="stylesheet" />
 		<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -167,8 +167,7 @@ $.tools.validator.localize("fi", {
 				</header>
 				<article>
 					<p>
-						Този псевдо-клас е рядко използван, но в
-						<a href="https://www.w3.org/TR/CSS21/selector.html#lang">спецификацията</a> се открива интересна
+						Този псевдо-клас е рядко използван, но в CSS спецификацията<a href="#ref-5">[5]</a> се открива интересна
 						информация за него:
 					</p>
 					<blockquote>
@@ -584,7 +583,7 @@ label {
 				</article>
 			</section>
 
-			<section id="references">
+			<section class="refs" id="references">
 				<h2>Източници</h2>
 				<p id="ref-1">
 					[1] Maksim Chemerisuk,
@@ -609,27 +608,31 @@ label {
 					<a href="https://hackernoon.com/internationalization-in-css" target="_blank">"Internationalization in CSS"</a
 					>, последно посетен на 02.05.2022
 				</p>
+				<p id="ref-5">
+					[5] W3C,
+					<a href="https://www.w3.org/TR/CSS21/selector.html#lang" target="_blank">"CSS Specification"</a>, последно
+					посетен на 05.05.2022
+				</p>
 			</section>
 
-			<section id="libs">
+			<section class="libs" id="libs">
 				<h2>Използвани библиотеки</h2>
-				<ul class="libs">
-					<li>
-						<a href="https://jquery.com/" target="_blank">jQuery</a> - улеснява и опростява писането на JavaScript код
-					</li>
-					<li>
-						<a href="https://select2.org/" target="_blank">Select2</a> - заменя обикновените select box-ове с
-						интерактивни такива, поддържащи търсене, тагване, безкрайно скролиране и др.
-					</li>
-					<li>
-						<a href="https://github.com/HatScripts/circle-flags" target="_blank">Circle Flags</a> - колекция с над 300
-						кръгли минималистични флагове
-					</li>
-					<li>
-						<a href="https://highlightjs.org/" target="_blank">highlight.js</a> - оцветява сегменти с код в сайтове
-					</li>
-					<li><a href="https://fontawesome.com/" target="_blank">Font Awesome</a> - библиотека с различни икони</li>
-				</ul>
+				<p>
+					<a href="https://jquery.com/" target="_blank">jQuery 3.6.0</a> - улеснява и опростява писането на JavaScript
+					код
+				</p>
+				<p>
+					<a href="https://select2.org/" target="_blank">Select2 4.1.0</a> - заменя обикновените select box-ове с
+					интерактивни такива, поддържащи търсене, тагване, безкрайно скролиране и др.
+				</p>
+				<p>
+					<a href="https://github.com/HatScripts/circle-flags" target="_blank">Circle Flags 2.3.0</a> - колекция с над
+					300 кръгли минималистични флагове
+				</p>
+				<p>
+					<a href="https://highlightjs.org/" target="_blank">highlight.js 11.5.1</a> - оцветява сегменти с код в сайтове
+				</p>
+				<p><a href="https://fontawesome.com/" target="_blank">Font Awesome 6.1.1</a> - библиотека с различни икони</p>
 			</section>
 		</section>
 
